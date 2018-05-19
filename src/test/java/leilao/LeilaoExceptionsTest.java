@@ -1,4 +1,4 @@
-package tests;
+package leilao;
 
 import java.util.Calendar;
 
@@ -6,6 +6,13 @@ import org.junit.Test;
 
 import exception.LeilaoException;
 import negocio.LeilaoNegocio;
+
+/**
+ * 
+ * @author Avana
+ * Testa a criação do leilão
+ *
+ */
 
 public class LeilaoExceptionsTest {
 	

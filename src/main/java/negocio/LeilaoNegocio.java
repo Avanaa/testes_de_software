@@ -41,7 +41,7 @@ public class LeilaoNegocio extends LeilaoModel {
 			throw new LeilaoException(LeilaoException.DATA_FIM_INVALIDA);
 		}
 
-		if (valorInicial.isNaN() || valorInicial.isInfinite() || valorInicial.equals(0)) {
+		if (valorInicial == null || valorInicial.isNaN() || valorInicial.isInfinite() || valorInicial.equals(0)) {
 			throw new LeilaoException(LeilaoException.VALOR_INICIAL_INVALIDO);
 		}
 
