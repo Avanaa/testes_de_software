@@ -2,28 +2,34 @@ package model;
 
 import java.util.Calendar;
 
-public class Lance {
-	
-	private Pessoa pessoa;
+public abstract class LanceModel {
+
+	private PessoaModel pessoa;
 	private Double valor;
 	private Calendar data;
 	
-	public Lance(Pessoa pessoa, Double valor) {
-		this.pessoa = pessoa;
-		this.valor = valor;
-		this.data = Calendar.getInstance();
+	public PessoaModel getPessoa() {
+		return pessoa;
 	}
 	
-	public Pessoa getPessoa() {
-		return pessoa;
+	protected void setPessoa(PessoaModel pessoa) {
+		this.pessoa = pessoa;
 	}
 	
 	public Double getValor() {
 		return valor;
 	}
 	
+	protected void setValor(Double valor) {
+		this.valor = valor;
+	}
+	
 	public Calendar getData() {
 		return data;
+	}
+	
+	protected void setData(Calendar data) {
+		this.data = data;
 	}
 
 	@Override
@@ -43,7 +49,7 @@ public class Lance {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Lance other = (Lance) obj;
+		LanceModel other = (LanceModel) obj;
 		if (pessoa == null) {
 			if (other.pessoa != null)
 				return false;

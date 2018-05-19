@@ -1,9 +1,16 @@
 package model;
 
-public class Pessoa {
+public class PessoaModel {
 	
 	private String nome;
 	private String codigo;
+	
+	public PessoaModel(String nome, String codigo) {
+		this.nome = nome;
+		this.codigo = codigo;
+	}
+	
+	public PessoaModel() {}
 	
 	public String getNome() {
 		return nome;
@@ -37,7 +44,7 @@ public class Pessoa {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pessoa other = (Pessoa) obj;
+		PessoaModel other = (PessoaModel) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
