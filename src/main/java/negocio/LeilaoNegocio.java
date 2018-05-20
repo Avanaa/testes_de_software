@@ -1,5 +1,6 @@
 package negocio;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class LeilaoNegocio extends LeilaoModel {
 			this.setInicio(inicio);
 			this.setFim(fim);
 			this.setValorInicial(valorInicial);
+			this.setLances(new ArrayList<LanceModel>());
 		}
 	}
 
@@ -33,7 +35,7 @@ public class LeilaoNegocio extends LeilaoModel {
 			throw new LeilaoException(LeilaoException.DESCRICAO_INVALIDA);
 		}
 
-		if (inicio.before(Calendar.getInstance())) {
+		if ((inicio == null) || (inicio.before(Calendar.getInstance()))) {
 			throw new LeilaoException(LeilaoException.DATA_INICIO_INVALIDA);
 		}
 
@@ -41,14 +43,14 @@ public class LeilaoNegocio extends LeilaoModel {
 			throw new LeilaoException(LeilaoException.DATA_FIM_INVALIDA);
 		}
 
-		if (valorInicial == null || valorInicial.isNaN() || valorInicial.isInfinite() || valorInicial.equals(0)) {
+		if (valorInicial == null || valorInicial.isNaN() || valorInicial.isInfinite() || valorInicial == 0.0) {
 			throw new LeilaoException(LeilaoException.VALOR_INICIAL_INVALIDO);
 		}
 
 		return true;
 	}
 
-	public boolean criarLance(LanceModel lance) {
+	public synchronized boolean criarLance(LanceModel lance) {
 
 		if (this.validaValorLance(lance) && this.validaUsuarioLance(lance) && this.validaDataLance(lance)) {
 			return this.getLances().add(lance);
@@ -58,7 +60,8 @@ public class LeilaoNegocio extends LeilaoModel {
 	}
 
 	private boolean validaValorLance(LanceModel lance) {
-		return lance.getValor() > this.valorInicial() && lance.getValor() > this.getMaiorLance().getValor();
+		return lance.getValor() > this.valorInicial() && 
+				((this.getMaiorLance() == null) || (lance.getValor() > this.getMaiorLance().getValor()));
 	}
 
 	private boolean validaUsuarioLance(LanceModel lance) {
@@ -75,7 +78,7 @@ public class LeilaoNegocio extends LeilaoModel {
 
 	public PessoaModel getVencedor() {
 
-		if (this.getVencedor().equals(null)) {
+		if (this.getVencedor() == null) {
 			if (this.getFim().after(Calendar.getInstance())) {
 				this.setVencedor(this.getMaiorLance().getPessoa());
 				return this.getMaiorLance().getPessoa();
@@ -88,15 +91,23 @@ public class LeilaoNegocio extends LeilaoModel {
 	}
 
 	public LanceModel getMaiorLance() {
+		
+		LanceModel maiorLance;
+		
+		if(this.getLances().size() > 0) {
+			
+			maiorLance = this.getLances().get(0);
 
-		LanceModel maiorLance = this.getLances().get(0);
-
-		for (LanceModel lance : this.getLances()) {
-			if (lance.getValor() > maiorLance.getValor()) {
-				maiorLance = lance;
+			for (LanceModel lance : this.getLances()) {
+				if (lance.getValor() > maiorLance.getValor()) {
+					maiorLance = lance;
+				}
 			}
+			return maiorLance;
+			
+		} else {
+			return null;			
 		}
-		return maiorLance;
 	}
 
 	public LanceModel getMenorLance() {
@@ -112,6 +123,6 @@ public class LeilaoNegocio extends LeilaoModel {
 	}
 
 	public List<LanceModel> getLances() {
-		return this.getLances();
+		return super.getLances();
 	}
 }

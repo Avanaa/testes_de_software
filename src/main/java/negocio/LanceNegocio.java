@@ -8,18 +8,23 @@ import model.PessoaModel;
 
 public class LanceNegocio extends LanceModel{
 
-	public LanceNegocio(PessoaModel pessoa, Double valor) throws LanceException{
+	public LanceNegocio(PessoaModel pessoa, Double valor) throws LanceException {
 		
 		if(pessoa == null) {
 			throw new LanceException(LanceException.USUARIO_INVALIDO);
 		}
 		
-		if(valor.isNaN() || valor.isInfinite() || (valor.floatValue() == 0)) {
+		if(valor.isNaN() || valor.isInfinite() || (valor == 0.0)) {
 			throw new LanceException(LanceException.VALOR_INVALIDO);
 		}
 		
 		this.setPessoa(pessoa);
 		this.setValor(valor);
-		this.setData(Calendar.getInstance());
+		Calendar data = Calendar.getInstance();
+		this.setData(data);
+	}
+	
+	public void setData(Calendar data) {
+		super.setData(data);
 	}
 }

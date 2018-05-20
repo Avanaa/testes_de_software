@@ -49,6 +49,10 @@ public abstract class LeilaoModel {
 		return this.lances;
 	}
 	
+	protected void setLances(List<LanceModel> lances) {
+		this.lances = lances;
+	}
+	
 	public Double valorInicial() {
 		return this.valorInicial;
 	}

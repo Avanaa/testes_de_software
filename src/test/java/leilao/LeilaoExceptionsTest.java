@@ -23,7 +23,7 @@ public class LeilaoExceptionsTest {
 	@Test(expected = LeilaoException.class)
 	public void testaLeilaoTituloVazio() throws LeilaoException {
 		
-		this.inicio.set(2018, 4, 19, 20, 00, 00);
+		this.inicio.set(2018, 4, 20, 20, 00, 00);
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
 		new LeilaoNegocio("", "Descrição", this.inicio, this.fim, this.valorInicial );	
@@ -32,7 +32,7 @@ public class LeilaoExceptionsTest {
 	@Test(expected = LeilaoException.class)
 	public void testaLeilaoTituloNulo() throws LeilaoException {
 		
-		this.inicio.set(2018, 4, 19, 20, 00, 00);
+		this.inicio.set(2018, 4, 20, 20, 00, 00);
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
 		new LeilaoNegocio(null, "Descrição", this.inicio, this.fim, this.valorInicial );	
@@ -41,7 +41,7 @@ public class LeilaoExceptionsTest {
 	@Test(expected = LeilaoException.class)
 	public void testaLeilaoDescricaoVazia() throws LeilaoException {
 		
-		this.inicio.set(2018, 4, 19, 20, 00, 00);
+		this.inicio.set(2018, 4, 20, 20, 00, 00);
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
 		new LeilaoNegocio("Título", "", this.inicio, this.fim, this.valorInicial );	
@@ -50,7 +50,7 @@ public class LeilaoExceptionsTest {
 	@Test(expected = LeilaoException.class)
 	public void testaLeilaoDescricaoNula() throws LeilaoException {
 		
-		this.inicio.set(2018, 4, 19, 20, 00, 00);
+		this.inicio.set(2018, 4, 20, 20, 00, 00);
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
 		new LeilaoNegocio("Título", null, this.inicio, this.fim, this.valorInicial );	
@@ -65,6 +65,15 @@ public class LeilaoExceptionsTest {
 		new LeilaoNegocio("Titulo", "Descrição", this.inicio, this.fim, this.valorInicial );	
 	}
 
+	@Test(expected = LeilaoException.class)
+	public void testaLeilaoDataInicioNula() throws LeilaoException {
+		
+		this.inicio.set(2018, 4, 18, 20, 00, 00);
+		this.fim.set(2018, 4, 30, 20, 00, 00);
+		
+		new LeilaoNegocio("Titulo", "Descrição", null, this.fim, this.valorInicial );	
+	}
+	
 	@Test(expected = LeilaoException.class)
 	public void testaLeilaoDataFimInvalida() throws LeilaoException {
 		
