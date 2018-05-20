@@ -5,7 +5,7 @@ import java.util.Calendar;
 import org.junit.Test;
 
 import exception.LeilaoException;
-import negocio.LeilaoNegocio;
+import impl.LeilaoNegocioImpl;
 
 /**
  * 
@@ -26,7 +26,7 @@ public class LeilaoExceptionsTest {
 		this.inicio.set(2018, 4, 20, 20, 00, 00);
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
-		new LeilaoNegocio("", "Descrição", this.inicio, this.fim, this.valorInicial );	
+		new LeilaoNegocioImpl("", "Descrição", this.inicio, this.fim, this.valorInicial );	
 	}
 
 	@Test(expected = LeilaoException.class)
@@ -35,7 +35,7 @@ public class LeilaoExceptionsTest {
 		this.inicio.set(2018, 4, 20, 20, 00, 00);
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
-		new LeilaoNegocio(null, "Descrição", this.inicio, this.fim, this.valorInicial );	
+		new LeilaoNegocioImpl(null, "Descrição", this.inicio, this.fim, this.valorInicial );	
 	}
 
 	@Test(expected = LeilaoException.class)
@@ -44,7 +44,7 @@ public class LeilaoExceptionsTest {
 		this.inicio.set(2018, 4, 20, 20, 00, 00);
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
-		new LeilaoNegocio("Título", "", this.inicio, this.fim, this.valorInicial );	
+		new LeilaoNegocioImpl("Título", "", this.inicio, this.fim, this.valorInicial );	
 	}
 	
 	@Test(expected = LeilaoException.class)
@@ -53,7 +53,7 @@ public class LeilaoExceptionsTest {
 		this.inicio.set(2018, 4, 20, 20, 00, 00);
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
-		new LeilaoNegocio("Título", null, this.inicio, this.fim, this.valorInicial );	
+		new LeilaoNegocioImpl("Título", null, this.inicio, this.fim, this.valorInicial );	
 	}
 
 	@Test(expected = LeilaoException.class)
@@ -62,7 +62,7 @@ public class LeilaoExceptionsTest {
 		this.inicio.set(2018, 4, 18, 20, 00, 00);
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
-		new LeilaoNegocio("Titulo", "Descrição", this.inicio, this.fim, this.valorInicial );	
+		new LeilaoNegocioImpl("Titulo", "Descrição", this.inicio, this.fim, this.valorInicial );	
 	}
 
 	@Test(expected = LeilaoException.class)
@@ -71,16 +71,25 @@ public class LeilaoExceptionsTest {
 		this.inicio.set(2018, 4, 18, 20, 00, 00);
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
-		new LeilaoNegocio("Titulo", "Descrição", null, this.fim, this.valorInicial );	
+		new LeilaoNegocioImpl("Titulo", "Descrição", null, this.fim, this.valorInicial );	
 	}
-	
+
 	@Test(expected = LeilaoException.class)
 	public void testaLeilaoDataFimInvalida() throws LeilaoException {
 		
 		this.inicio.set(2018, 4, 20, 20, 00, 00);
 		this.fim.set(2018, 4, 10, 20, 00, 00);
 		
-		new LeilaoNegocio("Titulo", "Descrição", this.inicio, this.fim, this.valorInicial );	
+		new LeilaoNegocioImpl("Titulo", "Descrição", this.inicio, this.fim, this.valorInicial );	
+	}
+
+	@Test(expected = LeilaoException.class)
+	public void testaLeilaoDataFimNula() throws LeilaoException {
+		
+		this.inicio.set(2018, 4, 20, 20, 00, 00);
+		this.fim.set(2018, 4, 10, 20, 00, 00);
+		
+		new LeilaoNegocioImpl("Titulo", "Descrição", this.inicio, null, this.valorInicial );	
 	}
 	
 	@Test(expected = LeilaoException.class)
@@ -89,7 +98,7 @@ public class LeilaoExceptionsTest {
 		this.inicio.set(2018, 4, 20, 20, 00, 00);
 		this.fim.set(2018, 4, 10, 20, 00, 00);
 		
-		new LeilaoNegocio("Titulo", "Descrição", this.inicio, this.fim, null );	
+		new LeilaoNegocioImpl("Titulo", "Descrição", this.inicio, this.fim, null );	
 	}
 
 	@Test(expected = LeilaoException.class)
@@ -98,7 +107,7 @@ public class LeilaoExceptionsTest {
 		this.inicio.set(2018, 4, 20, 20, 00, 00);
 		this.fim.set(2018, 4, 10, 20, 00, 00);
 		
-		new LeilaoNegocio("Titulo", "Descrição", this.inicio, this.fim, 0.0 );	
+		new LeilaoNegocioImpl("Titulo", "Descrição", this.inicio, this.fim, 0.0 );	
 	}
 
 	@Test(expected = LeilaoException.class)
@@ -107,6 +116,6 @@ public class LeilaoExceptionsTest {
 		this.inicio.set(2018, 4, 20, 20, 00, 00);
 		this.fim.set(2018, 4, 10, 20, 00, 00);
 		
-		new LeilaoNegocio("Titulo", "Descrição", this.inicio, this.fim, -2000.00 );	
+		new LeilaoNegocioImpl("Titulo", "Descrição", this.inicio, this.fim, -2000.00 );	
 	}
 }

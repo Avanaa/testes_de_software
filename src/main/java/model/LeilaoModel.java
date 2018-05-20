@@ -57,6 +57,10 @@ public abstract class LeilaoModel {
 		return this.valorInicial;
 	}
 	
+	public Double getValorInicial() {
+		return this.valorInicial;
+	}
+	
 	protected void setValorInicial(Double valorInicial) {
 		this.valorInicial = valorInicial;
 	}

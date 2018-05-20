@@ -7,7 +7,7 @@ import java.util.Calendar;
 import org.junit.Test;
 
 import exception.LeilaoException;
-import negocio.LeilaoNegocio;
+import impl.LeilaoNegocioImpl;
 
 /**
  * 
@@ -28,7 +28,7 @@ public class LeilaoMessageExceptionsTest {
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
 		try {
-			new LeilaoNegocio("", "Descrição", this.inicio, this.fim, this.valorInicial );
+			new LeilaoNegocioImpl("", "Descrição", this.inicio, this.fim, this.valorInicial );
 		} catch (LeilaoException e) {
 			assertEquals(LeilaoException.TITULO_INVALIDO, e.getMessage());
 		}	
@@ -41,10 +41,10 @@ public class LeilaoMessageExceptionsTest {
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
 		try {
-			new LeilaoNegocio(null, "Descrição", this.inicio, this.fim, this.valorInicial );
+			new LeilaoNegocioImpl(null, "Descrição", this.inicio, this.fim, this.valorInicial );
 		} catch (LeilaoException e) {
 			assertEquals(LeilaoException.TITULO_INVALIDO, e.getMessage());
-		}	
+		}
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class LeilaoMessageExceptionsTest {
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
 		try {
-			new LeilaoNegocio("Título", "", this.inicio, this.fim, this.valorInicial );
+			new LeilaoNegocioImpl("Título", "", this.inicio, this.fim, this.valorInicial );
 		} catch (LeilaoException e) {
 			assertEquals(LeilaoException.DESCRICAO_INVALIDA, e.getMessage());
 		}	
@@ -67,7 +67,7 @@ public class LeilaoMessageExceptionsTest {
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
 		try {
-			new LeilaoNegocio("Título", null, this.inicio, this.fim, this.valorInicial );
+			new LeilaoNegocioImpl("Título", null, this.inicio, this.fim, this.valorInicial );
 		} catch (LeilaoException e) {
 			assertEquals(LeilaoException.DESCRICAO_INVALIDA, e.getMessage());
 		}
@@ -81,7 +81,7 @@ public class LeilaoMessageExceptionsTest {
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
 		try {
-			new LeilaoNegocio("Titulo", "Descrição", this.inicio, this.fim, this.valorInicial );
+			new LeilaoNegocioImpl("Titulo", "Descrição", this.inicio, this.fim, this.valorInicial );
 		} catch (LeilaoException e) {
 			assertEquals(LeilaoException.DATA_INICIO_INVALIDA, e.getMessage());
 		}	
@@ -94,7 +94,7 @@ public class LeilaoMessageExceptionsTest {
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
 		try {
-			new LeilaoNegocio("Titulo", "Descrição", this.inicio, this.fim, this.valorInicial );
+			new LeilaoNegocioImpl("Titulo", "Descrição", this.inicio, this.fim, this.valorInicial );
 		} catch (LeilaoException e) {
 			assertEquals(LeilaoException.DATA_FIM_INVALIDA, e.getMessage());
 		}	
@@ -107,7 +107,7 @@ public class LeilaoMessageExceptionsTest {
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
 		try {
-			new LeilaoNegocio("Titulo", "Descrição", this.inicio, this.fim, null );
+			new LeilaoNegocioImpl("Titulo", "Descrição", this.inicio, this.fim, null );
 		} catch (LeilaoException e) {
 			assertEquals(LeilaoException.VALOR_INICIAL_INVALIDO, e.getMessage());
 		}	
@@ -120,7 +120,7 @@ public class LeilaoMessageExceptionsTest {
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
 		try {
-			new LeilaoNegocio("Titulo", "Descrição", this.inicio, this.fim, 0.0 );
+			new LeilaoNegocioImpl("Titulo", "Descrição", this.inicio, this.fim, 0.0 );
 		} catch (LeilaoException e) {
 			assertEquals(LeilaoException.VALOR_INICIAL_INVALIDO, e.getMessage());
 		}	
@@ -133,7 +133,7 @@ public class LeilaoMessageExceptionsTest {
 		this.fim.set(2018, 4, 30, 20, 00, 00);
 		
 		try {
-			new LeilaoNegocio("Titulo", "Descrição", this.inicio, this.fim, -2000.00 );
+			new LeilaoNegocioImpl("Titulo", "Descrição", this.inicio, this.fim, -2000.00 );
 		} catch (LeilaoException e) {
 			assertEquals(LeilaoException.VALOR_INICIAL_INVALIDO, e.getMessage());
 		}	
